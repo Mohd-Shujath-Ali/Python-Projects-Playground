@@ -33,7 +33,7 @@ Examples:
 Every push triggers automated tests using **GitHub Actions**, ensuring clean and reliable code for every update.
 
 **Build Status:**  
-![Python CI](https://github.com/Mohd-Shujath-Ali/Python-Projects-Playground/actions/workflows/ci.yml/badge.svg)
+[![Python CI](https://github.com/Mohd-Shujath-Ali/Python-Projects-Playground/actions/workflows/main.yml/badge.svg)](https://github.com/Mohd-Shujath-Ali/Python-Projects-Playground/actions)
 
 ---
 
