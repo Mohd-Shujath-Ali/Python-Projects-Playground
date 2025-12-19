@@ -1,32 +1,29 @@
-
 # 🤖 AI Chatbot using an API
 
 ## Overview
 
-Let’s be honest! **interacting with AI models through web dashboards can feel limiting**.
-As developers, we prefer tools that are **simple, fast, and live right inside the terminal** 🚀.
+As a developer at an early learning stage, I’m starting by building AI interactions directly in the terminal, A simple and focused environment that helps me understand the fundamentals without extra complexity.
 
-This Python script brings an **AI-powered chatbot directly to your command line**.
-It uses the **Hugging Face Inference API** to communicate with a hosted language model, allowing you to send prompts and receive intelligent responses in real time.
+This Python project explores how to create an AI-powered chatbot in the command line using the Hugging Face Inference API and the
+google/gemma-2-2b-it:nebius model. The goal is to practice working with hosted language models while learning about secure API authentication, structured error handling, and clean program design.
 
-This project marks a strong progression in my development journey — moving from basic scripts to working with **cloud-hosted AI models**, **secure API authentication**, and **robust error-handling systems** designed for real-world reliability.
+The project is built with extensibility in mind and is planned to evolve into a **web-based chatbot using Flask**.
 
 ---
 
 ## ⚡ Features
 
-* Interactive **AI chatbot** running entirely in the terminal.
-* Uses **Hugging Face Inference API** for real-time responses.
+* Interactive **AI chatbot** in the terminal.
+* Uses **Hugging Face Inference API** via `InferenceClient`.
 * Secure API key management using **environment variables**.
-* Supports continuous conversation until the user exits.
-* Graceful exit using the `quit` command.
-* Implements **detailed error handling** for:
+* Continuous conversation loop with clean exit (`quit`).
+* Explicit model selection.
+* Two-layer **error handling system**:
 
-  * API response errors
-  * Rate limits and authentication failures
-  * Network and runtime exceptions
-* Organized, readable, and maintainable Python code.
-* Designed with production-aware error catalogs.
+  * Hugging Face HTTP error catalog
+  * Python & network exception catalog
+* Clear, readable error messages.
+* Designed for real-world reliability and future expansion.
 
 ---
 
@@ -38,51 +35,61 @@ This project marks a strong progression in my development journey — moving fro
 
 ### Dependencies
 
-The script uses the following external libraries:
-
-| Module            | Purpose                                           | Installation Required   |
-| ----------------- | ------------------------------------------------- | ----------------------- |
-| `python-dotenv`   | Loads environment variables securely from `.env`. | ✅ Yes                   |
-| `requests`        | Handles network and HTTP operations.              | ✅ Yes                   |
-| `openai`          | Included for compatibility and future extensions. | ✅ Yes                   |
-| `huggingface_hub` | Connects to Hugging Face Inference API.           | ✅ Yes                   |
-| `os`              | Accesses environment variables.                   | ❌ No (Standard Library) |
+| Module            | Purpose                                  | Install |
+| ----------------- | ---------------------------------------- | ------- |
+| `python-dotenv`   | Loads environment variables from `.env`. | ✅ Yes   |
+| `requests`        | Handles HTTP and network operations.     | ✅ Yes   |
+| `huggingface_hub` | Connects to Hugging Face Inference API.  | ✅ Yes   |
+| `openai`          | Reserved for future compatibility.       | ✅ Yes   |
+| `os`              | Accesses environment variables.          | ❌ No    |
 
 ---
 
-### 🧩 Standard Library & Core Concepts Used
+### 🧩 Core Concepts Used
 
-| Concept / Function    | Purpose                                    | Used For                              |
-| --------------------- | ------------------------------------------ | ------------------------------------- |
-| `while True`          | Maintains continuous interaction loop.     | Persistent chat session.              |
-| `try / except`        | Handles runtime and API errors gracefully. | Prevents crashes.                     |
-| Environment variables | Secures sensitive credentials.             | API key protection.                   |
-| Dictionaries          | Stores structured error catalogs.          | Clear error reporting.                |
-| Exception inspection  | Identifies error source.                   | Differentiates API vs network errors. |
+* Environment variables for secure credentials
+* Infinite input loop (`while True`)
+* Structured dictionaries for error catalogs
+* `try / except` for runtime and API failures
+* Exception inspection for accurate error reporting
 
-These come built-in with Python and don’t require installation.
+---
+
+## 🧠 Error Handling
+
+The chatbot implements **production-aware error handling** using two catalogs:
+
+* **HF_ERROR_CATALOG**
+  Handles API-level errors such as authentication failure, rate limits, and model unavailability.
+
+* **PY_ERROR_CATLOG**
+  Handles Python and network-level errors such as connection issues, timeouts, and SSL failures.
+
+This ensures clean failure states and meaningful diagnostics.
 
 ---
 
 ## ⚙️ Installation
 
-Install the required dependencies using:
+Install dependencies:
 
 ```bash
 pip install python-dotenv requests openai huggingface_hub
 ```
 
-Create a `.env` file in the project directory and add your API key:
+Create a `.env` file in the project root:
 
 ```env
 API_KEY=your_huggingface_api_key_here
 ```
 
+> ⚠️ Never commit your `.env` file. Add it to `.gitignore`.
+
 ---
 
 ## 🚀 Usage
 
-Run the chatbot script:
+Run the chatbot:
 
 ```bash
 python main.py
@@ -94,10 +101,24 @@ Start chatting:
 Enter prompt: What is artificial intelligence?
 ```
 
-Exit the chatbot:
+Exit safely:
 
 ```text
 Enter prompt: quit
 ```
 
+---
 
+## 🌐 Future Plans
+
+* Web-based chatbot using **Flask**
+* REST API endpoint for AI responses
+* Browser-based UI
+* Session-based conversations
+* Deployment-ready structure
+
+---
+
+## 📌 Notes
+.env file is mandatory to run the main.py and add your API_KEY=in it
+This project focuses on **clean API integration, defensive programming, and extensibility**, serving as a solid foundation for both CLI and future web-based AI applications.
