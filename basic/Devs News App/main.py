@@ -1,6 +1,6 @@
 import requests
 
-API_KEY = "d2e4ca5da252486cb63c9283b312613b"
+API_KEY = "YOUR_API_KEY"
 BASE_URL = "https://newsapi.org/v2/everything" #will append parameters to this base url later
 
 def fetch_news(query):
